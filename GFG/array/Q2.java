@@ -37,17 +37,13 @@ public class Q2 {
 
         int[] inputArray = Arrays.stream(inputString).mapToInt(Integer :: parseInt).toArray();
         int maxProfit = 0;
+        int buy = inputArray[0];
 
-        for (int i = 0; i < inputArray.length; i++) {
-            for (int j = i; j < inputArray.length; j++) {
-                if(inputArray[j] - inputArray[i] > maxProfit){
-                    maxProfit = inputArray[j] - inputArray[i];
-                }
-            }
+        for (int i = 1; i < inputArray.length; i++) {
+            if(inputArray[i] < buy) buy = inputArray[i];
+            else if(inputArray[i] - buy > maxProfit) maxProfit = inputArray[i] - buy;
         }
-
         System.out.println("Max profit is: " + maxProfit);
-
         s.close();
     }
 }
