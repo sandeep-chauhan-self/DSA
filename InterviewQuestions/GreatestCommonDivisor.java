@@ -13,9 +13,16 @@ public class GreatestCommonDivisor {
 
     private static int gcd(int a, int b) {
 
-        int n  = a>b?b:a;
+        int n = a > b ? b : a;
 
-        
+        while (n > 0) {
+            if (a % n == 0 && b % n == 0) {
+                return n;
+            } else {
+                n--;
+            }
+
+        }
 
         return 0;
     }
