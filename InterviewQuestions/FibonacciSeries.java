@@ -23,8 +23,6 @@ public class FibonacciSeries {
             return "";
         } else if (number == 1) {
             fib = fib + a;
-        } else if (number == 2) {
-            fib = fib + a + " " + b;
         } else{
             fib = fib + a + " " + b;
             for (int i = 2; i < number; i++) {
