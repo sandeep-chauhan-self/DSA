@@ -4,40 +4,43 @@ import java.util.Arrays;
 
 public class QuickSort {
     public static void main(String[] args) {
-        int[] arr = { 5, 4, 3, 2, 1 };
+        int[] arr = { 9, 8, 7, 6, 5, 4, 3, 0, 2, 1, 0 };
+        // int[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         sort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 
-    private static void sort(int[] arr, int s, int e) {
-        if(s >= e) return;
-        int low = s;
-        int high = e;
+    static void sort(int[] nums, int low, int hi) {
+        if (low >= hi) {
+            return;
+        }
+
+        int s = low;
+        int e = hi;
         int m = s + (e - s) / 2;
-        int pivot = arr[m];
+        int pivot = nums[m];
 
-        while (low <= high) {
-            while (arr[low] < pivot) {
-                low++;
+        while (s <= e) {
+
+            // also a reason why if its already sorted it will not swap
+            while (nums[s] < pivot) {
+                s++;
             }
-            while (arr[high] > pivot) {
-                high--;
+            while (nums[e] > pivot) {
+                e--;
             }
 
-            if (low <= high) {
-                swap(arr, low, high);
-                low++;
-                high--;
+            if (s <= e) {
+                int temp = nums[s];
+                nums[s] = nums[e];
+                nums[e] = temp;
+                s++;
+                e--;
             }
         }
 
-        sort(arr, s, high);
-        sort(arr, low, e);
-    }
-
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+        // now my pivot is at correct index, please sort two halves now
+        sort(nums, low, e);
+        sort(nums, s, hi);
     }
 }
