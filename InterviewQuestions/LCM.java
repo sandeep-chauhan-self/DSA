@@ -15,7 +15,7 @@ public class LCM {
         s.close();
     }
 
-    public static int gcd(int a, int b) {
+    public static int gcd(int a, int b) { 
         int n = a > b ? b : a;
 
         while (n > 0) {
