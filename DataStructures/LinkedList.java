@@ -1,9 +1,8 @@
 package DSA.DataStructures;
 
-import javax.sound.midi.Track;
 
-public class LinkedList {
-    Node head;
+public class LinkedList<T> {
+    Node<T> head;
     int len = 0;
 
     /**
@@ -12,12 +11,12 @@ public class LinkedList {
      *
      * @param data Will be added at last of LinkedList
      */
-    public void add(int data) {
-        Node node = new Node(data);
+    public void add(T data) {
+        Node<T> node = new Node<>(data);
         if (head == null) {
             head = node;
         } else {
-            Node temp = head;
+            Node<T> temp = head;
 
             while (temp.next != null) {
                 temp = temp.next;
@@ -33,12 +32,12 @@ public class LinkedList {
      *
      * @param data Will be added at the Last position in LinkedList
      */
-    public void addLast(int data) {
+    public void addLast(T data) {
         add(data);
     }
 
-    public void addFirst(int data) {
-        Node node = new Node(data);
+    public void addFirst(T data) {
+        Node<T> node = new Node<>(data);
 
         if (head == null) {
             head = node;
@@ -49,15 +48,14 @@ public class LinkedList {
         len++;
     }
 
-    public void add(int index, int data) {
+    public void add(int index, T data) {
         if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
         }
 
-        Node node = new Node(data);
-
-        Node temp = head;
-        Node prev = null;
+        Node<T> node = new Node<>(data);
+        Node<T> temp = head;
+        Node<T> prev = null;
         while (temp.next != null && index >= 0) {
             index--;
             prev = temp;
@@ -69,10 +67,10 @@ public class LinkedList {
 
     }
 
-    public LinkedList clone() {
-        LinkedList clone = new LinkedList();
+    public LinkedList<T> clone() {
+        LinkedList<T> clone = new LinkedList<>();
 
-        Node temp = head;
+        Node<T> temp = head;
         while (temp.next != null) {
             clone.add(temp.data);
             temp = temp.next;
@@ -80,12 +78,12 @@ public class LinkedList {
         return clone;
     }
 
-    public boolean contains(int data) {
+    public boolean contains(T data) {
         if (head == null) {
             return false;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         while (temp != null) {
             if (temp.data == data) {
                 return true;
@@ -100,42 +98,42 @@ public class LinkedList {
         return len;
     }
 
-    public int pop() throws underflowException {
+    public T pop() throws underflowException {
 
         if (head == null) {
             throw new underflowException();
         }
 
-        int data = head.data;
+        T data = head.data;
         head = head.next;
         len--;
         return data;
     }
 
-    public int removeFirst() throws underflowException {
+    public T removeFirst() throws underflowException {
         return pop();
     }
 
-    public int removeLast() throws underflowException {
+    public T removeLast() throws underflowException {
         if (head == null) {
             throw new underflowException();
         }
 
         if (head.next == null) {
-            int data = head.data;
+            T data = head.data;
             head = null;
             len--;
             return data;
         }
 
-        Node current = head;
-        Node prev = null;
+        Node<T> current = head;
+        Node<T> prev = null;
         while (current.next != null) {
             prev = current;
             current = current.next;
         }
 
-        int data = current.data;
+        T data = current.data;
         prev.next = null;
         len--;
         return data;
@@ -147,7 +145,7 @@ public class LinkedList {
         len = 0;
     }
 
-    public boolean equals(LinkedList list) {
+    public boolean equals(LinkedList<T> list) {
 
         if (list == this) {
             return true;
@@ -155,8 +153,8 @@ public class LinkedList {
             return false;
         }
 
-        Node thisTemp = this.head;
-        Node listTemp = list.head;
+        Node<T> thisTemp = this.head;
+        Node<T> listTemp = list.head;
 
         while (thisTemp != null) {
             if (thisTemp.data != listTemp.data) {
@@ -170,7 +168,7 @@ public class LinkedList {
     }
 
     public void display() {
-        Node current = head;
+        Node<T> current = head;
         while (current != null) {
             System.out.print(current.data + " ");
             current = current.next;
@@ -180,11 +178,11 @@ public class LinkedList {
 
 }
 
-class Node {
-    int data;
-    Node next;
+class Node<T> {
+    T data;
+    Node<T> next;
 
-    Node(int data) {
+    Node(T data) {
         this.data = data;
         this.next = null;
     }
